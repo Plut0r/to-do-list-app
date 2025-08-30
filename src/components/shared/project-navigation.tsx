@@ -8,7 +8,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "@/contexts/theme-manager";
 
@@ -16,6 +16,24 @@ export const ProjectNavigation = () => {
   const pathname = usePathname();
   const [openTabs, setOpenTabs] = useState<number[]>([]);
   const isHomePage = pathname === "/";
+
+  const isTabOpen = (tabId: number) => openTabs.includes(tabId);
+
+  const { theme, updateTheme } = useTheme();
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      setIsDark(true);
+    } else if (theme === "system") {
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      setIsDark(prefersDark);
+    } else {
+      setIsDark(false);
+    }
+  }, [theme]);
 
   const toggleTab = (tabId: number) => {
     setOpenTabs((prev) =>
@@ -25,16 +43,6 @@ export const ProjectNavigation = () => {
     );
   };
 
-  const isTabOpen = (tabId: number) => openTabs.includes(tabId);
-
-  const { theme, updateTheme } = useTheme();
-
-  const isDark =
-    theme === "dark" ||
-    (theme === "system" &&
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches);
-
   return (
     <div
       className={`w-[318px] h-screen bg-white dark:bg-dark-bg pt-8 px-6 pb-6 flex flex-col transition-all duration-300 ease-in-out shrink-0`}
@@ -43,7 +51,9 @@ export const ProjectNavigation = () => {
       }}
     >
       <div className="flex items-center justify-between shrink-0">
-        <p className="text-sidebar-bg dark:text-white text-[30px] font-bold">Projects</p>
+        <p className="text-sidebar-bg dark:text-white text-[30px] font-bold">
+          Projects
+        </p>
         <Button className="w-7 h-7 rounded-full bg-sidebar-bg/8 dark:bg-white/8 hover:bg-sidebar-bg dark:hover:bg-white text-sidebar-bg/40 dark:text-white/40 hover:text-white dark:hover:text-black [&_svg:not([class*='size-'])]:size-5">
           <Plus size={20} />
         </Button>
@@ -125,14 +135,20 @@ export const ProjectNavigation = () => {
       <div className="shrink-0 w-full h-[42px] rounded-[22px] bg-sidebar-bg/4 dark:bg-white/4 p-1 grid grid-cols-2">
         <div
           onClick={() => updateTheme("light")}
-          className={`${isDark ? 'bg-transparent text-white/50' : 'bg-white text-sidebar-bg'} rounded-[18px] w-full h-full cursor-pointer flex items-center justify-center gap-[6px]`}
+          className={`${
+            isDark ? "bg-transparent text-white/50" : "bg-white text-sidebar-bg"
+          } rounded-[18px] w-full h-full cursor-pointer flex items-center justify-center gap-[6px]`}
         >
           <SunMedium size={20} />
           <p className="text-sm font-semibold">Light</p>
         </div>
         <div
           onClick={() => updateTheme("dark")}
-          className={`${isDark ? 'bg-white/6 text-white shadow-[0_8px_6px_0_rgba(28,_29,_34,_0.16)]' : 'bg-transparent text-sidebar-bg/50'} rounded-[18px] w-full h-full cursor-pointer flex items-center justify-center gap-[6px]`}
+          className={`${
+            isDark
+              ? "bg-white/6 text-white shadow-[0_8px_6px_0_rgba(28,_29,_34,_0.16)]"
+              : "bg-transparent text-sidebar-bg/50"
+          } rounded-[18px] w-full h-full cursor-pointer flex items-center justify-center gap-[6px]`}
         >
           <Moon size={20} />
           <p className="text-sm font-semibold">Dark</p>
