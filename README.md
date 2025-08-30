@@ -37,7 +37,6 @@ http://localhost:3000
 - **@hello-pangea/dnd** - Drag and drop functionality
 - **shadcn/ui** - Accessible components
 
-```
 
 ## 📁 Project Structure
 
@@ -55,5 +54,3 @@ src/
 └── constants/
     └── data.ts            # Static data
 ```
-
----
