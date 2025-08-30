@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧩 To-Do List App with 3D Feedback
 
-## Getting Started
+A sleek task management interface built with **Next.js**, featuring interactive drag-and-drop functionality and a dynamic 3D cube powered by **React Three Fiber**. This project uses static data and focuses on visual feedback and smooth UI interactions.
 
-First, run the development server:
+---
+
+## ✨ Core Features
+
+- 🗂️ **Kanban Board** — Tasks organized into "To Do", "In Progress", and "Done"
+- 🎯 **Drag & Drop** — Move tasks between columns with fluid transitions
+- ✅ **Progress Bar** — Automatically turns green when a task is marked as "Done"
+- 🎲 **3D Cube Widget** — Rotates, floats, and changes color based on drag state
+- 🌗 **Theme Support** — Toggle between light and dark modes
+
+---
+
+## 🚀 Getting Started
 
 ```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Visit the app
+http://localhost:3000
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Technology Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js** - React framework with App Router
+- **React Three Fiber** - 3D graphics library
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling framework
+- **@hello-pangea/dnd** - Drag and drop functionality
+- **shadcn/ui** - Accessible components
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/                    # Next.js App Router
+├── components/
+│   ├── shared/            # Reusable components
+│   ├── tasks/             # Task-related components
+│   └── ui/                # UI component library
+├── contexts/
+│   └── theme-manager.tsx  # Theme context
+├── lib/
+│   └── utils.ts           # Utilities and color system
+└── constants/
+    └── data.ts            # Static data
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
